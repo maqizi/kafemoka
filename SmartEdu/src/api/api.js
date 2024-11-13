@@ -156,4 +156,5 @@ export const retrieveInfo = (db_name,query) => {
     return axios.post(`http://127.0.0.1:8000/api/retrieve/`, 
     {'db_name': db_name,
     'query': query,
-    })} 
+    })
+	} 

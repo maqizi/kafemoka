@@ -345,6 +345,7 @@ class retrieve(APIView):
             for d in doc:
              if d[0]=="page_content":
               str1.append(d[1])
+        print(str1)
         return Response(str1)
     #end
 

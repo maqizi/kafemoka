@@ -915,8 +915,7 @@ const formattedTime = `${hours}:${minutes}:${seconds}.${milliseconds}`;
 				<h3>${this.teachStru[i]}</h3><p>教学环节一：教师：xxx；学生：xxx；设计意图：xxx；教师：xxx；学生：xxx；设计意图：xxx；教学环节二：xxx</p>`;
 				}
 				let query=this.teachInfo+us;
-				// this.performAction(query);
-				console.log('context'+this.context);
+				this.performAction(query);
 				us = `请根据课程内容信息:${this.context}，输出 ${this.teachStru[i]},输出格式为：
 				<h3>${this.teachStru[i]}</h3><p>${this.teachStru[i]}的内容</p>`;
 				if(this.obj!=''){
