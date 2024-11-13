@@ -14,7 +14,17 @@ from uuid import uuid4
 import bs4
 from django.core.files.storage import default_storage
 
-
+persist_directory='./db/ChineseSubject/ms/'+'mstwoh'  
+model_name = "E:\\myGithub\\kafemoka\\yys\\SmartEduDjango\\moka-ai\\m3e-base"
+model_kwargs = {'device': 'cpu'}
+encode_kwargs = {'normalize_embeddings': True}
+embeddings = HuggingFaceBgeEmbeddings(
+model_name=model_name,
+model_kwargs=model_kwargs,
+encode_kwargs=encode_kwargs,
+query_instruction="为文本生成向量表示用于文本检索"
+)
+db = Chroma(collection_name="cmsoneh",embedding_function=embeddings,persist_directory=persist_directory)   
 
 
 
@@ -244,7 +254,7 @@ class createdb(APIView):
         source_file_temp_save_path=str(time.time())+source_file.name
         #保存文件到指定目录 首先获得当前脚本所在的目录，再将该目录转换为绝对路径
         #basedir=os.path.abspath(os.path.dirname(__file__))
-        basedir="E:\\yys\\SmartEduDjango\\data\\ChineseSubject"
+        basedir="E:\myGithub\kafemoka\yys\SmartEduDjango\data\ChineseSubject"
         filepath=os.path.join(basedir,'ms',source_file_temp_save_path) #ms是存放文件的子目录
         # 确保路径存在
         dir=os.path.dirname(filepath)
@@ -293,8 +303,8 @@ class createdb(APIView):
         
         splits=text_splitter.split_documents(pages)
         print(splits)
-        model_name = "E:\\yys\\SmartEduDjango\\moka_ai\\m3e_base"
-        model_kwargs = {'device': 'cuda'}
+        model_name = "E:\\myGithub\\kafemoka\\yys\\SmartEduDjango\\moka-ai\\m3e-base"
+        model_kwargs = {'device': 'cpu'}
         encode_kwargs = {'normalize_embeddings': True}
         embeddings = HuggingFaceBgeEmbeddings(
                 model_name=model_name,
@@ -327,17 +337,7 @@ class retrieve(APIView):
         query = request.data.get('query')
         # similarity search
         #question=query
-        persist_directory='./db/ChineseSubject/ms/'+'cmsoneh'  
-        model_name = "E:\\yys\\SmartEduDjango\\moka_ai\\m3e_base"
-        model_kwargs = {'device': 'cpu'}
-        encode_kwargs = {'normalize_embeddings': True}
-        embeddings = HuggingFaceBgeEmbeddings(
-        model_name=model_name,
-        model_kwargs=model_kwargs,
-        encode_kwargs=encode_kwargs,
-        query_instruction="为文本生成向量表示用于文本检索"
-     )
-        db = Chroma(embedding_function=embeddings,persist_directory=persist_directory)   
+        
         docs = db.similarity_search(query, k=5)
         
         str1=[]
