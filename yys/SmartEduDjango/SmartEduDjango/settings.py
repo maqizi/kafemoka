@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'Users',
     'rest_framework.authtoken',
+    'Lesson.apps.LessonConfig',
 ]
 
 MIDDLEWARE = [
@@ -85,7 +86,7 @@ WSGI_APPLICATION = 'SmartEduDjango.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lesson', # 数据库名称
+        'NAME': 'test_lesson', # 数据库名称
         'HOST': '127.0.0.1', # 数据库地址，本机 ip 地址 127.0.0.1 
         'PORT': 3306, # 端口 
         'USER': 'root',  # 数据库用户名
@@ -94,6 +95,13 @@ DATABASES = {
     
 }
 
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': ['172.28.212.158:9200'],  # Elasticsearch 服务地址
+        #'http_auth': ('elastic', 'LPW5fyQ3M7QnFGMUu82t'),
+        'scheme': 'https'
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
