@@ -44,6 +44,7 @@ urlpatterns = [
     path('api/uploadocuments/',views.uploadsFlie.as_view()),
     path('api/createdb/',views.createdb.as_view()),
     path('api/retrieve/',views.retrieve.as_view()),
+    path('api/lesson/', include('Lesson.urls')),
 ]
 
 
